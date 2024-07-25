@@ -73,7 +73,7 @@ public class AuthorService {
                     bookRepository.save(book);
                     author.getBooks().add(book);
 
-                    return author;
+                    return authorRepository.save(author);
 
                 })
         ).orElse(null);

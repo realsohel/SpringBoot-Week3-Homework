@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -31,4 +32,19 @@ public class BookEntity {
     @JoinColumn(name = "Book_written_by")
     @JsonIgnore
     private AuthorEntity author;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this==obj)
+            return true;
+        if(!(obj instanceof BookEntity that))
+            return false;
+
+        return Objects.equals(getId(),that.getId()) && Objects.equals(getTitle(),that.getTitle());
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(getId(),getTitle());
+    }
 }
